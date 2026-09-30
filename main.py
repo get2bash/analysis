@@ -18,4 +18,16 @@ Second implimentation using pandas, and it's just three lines of code.
 """
 data = pandas.read_csv("weather_data.csv")
 temprature = data["temp"]
-print(temprature)
+
+
+"""
+Normal way to look for the mean of a list 
+"""
+average = sum(temprature) / len(temprature)
+
+
+"""
+Using pandas you just call the mean method
+"""
+
+average_2 = temprature.mean()

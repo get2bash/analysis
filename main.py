@@ -3,7 +3,7 @@ import pandas
 import turtle
 
 """
-First implimentation using the csv library to read a csv file (trying out Data analysis with python for the first time).
+First implementation using the csv library to read a csv file (trying out Data analysis with python for the first time).
 """
 # with open("weather_data.csv") as data_file:
 #     data = csv.reader(data_file)
@@ -16,7 +16,7 @@ First implimentation using the csv library to read a csv file (trying out Data a
 
 
 """
-Second implimentation using pandas, and it's just three lines of code.
+Second implementation using pandas, and it's just three lines of code.
 """
 # data = pandas.read_csv("weather_data.csv")
 # temprature = data["temp"]
@@ -46,4 +46,22 @@ image = "blank_states_img.gif"
 screen.addshape(image)
 turtle.shape(image)
 
-state_answer = screen.textinput(title="U.S States", prompt="write the name of a state")
+data = pandas.read_csv("50_states.csv")
+states = data.state.to_list()
+correct_states = []
+
+while len(correct_states) < 50:
+    state_answer = screen.textinput(title=f"You have {len(correct_states)}/50", prompt="write the name of a state")
+    response = state_answer.title()
+    if response == "Exit":
+        break
+    if response in states:
+        t = turtle.Turtle()
+        t.hideturtle()
+        t.penup()
+        state_data = data[data.state == response]
+        t.goto(state_data.x.item(), state_data.y.item())
+        t.write(response)
+        correct_states.append(response)
+        score += 1
+

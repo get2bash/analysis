@@ -53,7 +53,13 @@ correct_states = []
 while len(correct_states) < 50:
     state_answer = screen.textinput(title=f"You have {len(correct_states)}/50", prompt="write the name of a state")
     response = state_answer.title()
+    missing_states = []
     if response == "Exit":
+        for state in states:
+            if state not in correct_states:
+                missing_states.append(state)
+        new_data = pandas.DataFrame(missing_states)
+        new_data.to_csv("states_to_learn.csv")
         break
     if response in states:
         t = turtle.Turtle()
